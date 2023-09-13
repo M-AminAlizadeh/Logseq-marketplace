@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Plugin from './Plugin';
+import NotFound from './NotFound';
 
 const Plugins = ({ plugins, searchValue }) => {
   if (!searchValue) {
@@ -23,6 +24,10 @@ const Plugins = ({ plugins, searchValue }) => {
   const filteredPlugins = plugins.filter(
     (plugin) => plugin.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
+
+  if (filteredPlugins.length === 0) {
+    return <NotFound />;
+  }
 
   return (
     <div className="container mx-auto my-6 grid grid-cols-3 gap-4 grid-auto-flow">
