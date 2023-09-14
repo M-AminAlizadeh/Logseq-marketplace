@@ -35,6 +35,7 @@ const Plugins = ({ plugins, searchValue }) => {
       { filteredPlugins.map((plugin) => (
         <Plugin
           key={plugin.id}
+          id={plugin.id}
           icon={plugin.icon}
           title={plugin.title}
           author={plugin.author}
