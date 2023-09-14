@@ -6,7 +6,7 @@ import NotFound from './NotFound';
 const Plugins = ({ plugins, searchValue }) => {
   if (!searchValue) {
     return (
-      <div className="container mx-auto my-6 grid grid-cols-3 gap-4 grid-auto-flow">
+      <div className="container mx-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         { plugins.map((plugin) => (
           <Plugin
             key={plugin.id}
@@ -31,7 +31,7 @@ const Plugins = ({ plugins, searchValue }) => {
   }
 
   return (
-    <div className="container mx-auto my-6 grid grid-cols-3 gap-4 grid-auto-flow">
+    <div className="container mx-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       { filteredPlugins.map((plugin) => (
         <Plugin
           key={plugin.id}
