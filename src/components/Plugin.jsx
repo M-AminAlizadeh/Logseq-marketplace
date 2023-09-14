@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
 
 const Plugin = ({
-  icon, title, author, description, repo,
+  id, icon, title, author, description, repo,
 }) => {
-  const repoUrl = repo;
-  const userNameAndBranch = repoUrl.split('com/')[1];
+  const properIconUrl = (icon) => {
+    if (icon.includes('/')) {
+      return icon.split('/')[1];
+    }
+    return icon;
+  };
 
   return (
     <section className="border-2 p-3 rounded-md">
       <img
         width="100px"
-        src={`https://raw.githubusercontent.com/${userNameAndBranch}/main/${icon}`}
+        src={icon ? `https://raw.githubusercontent.com/logseq/marketplace/master/packages/${id}/${properIconUrl(icon)}` : 'https://img.icons8.com/pastel-glyph/64/page-not-found--v2.png'}
         alt="plugin-icon"
         className="my-3"
       />
@@ -32,6 +36,7 @@ const Plugin = ({
 };
 
 Plugin.propTypes = {
+  id: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,

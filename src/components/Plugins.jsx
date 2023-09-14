@@ -10,6 +10,7 @@ const Plugins = ({ plugins, searchValue }) => {
         { plugins.map((plugin) => (
           <Plugin
             key={plugin.id}
+            id={plugin.id}
             icon={plugin.icon}
             title={plugin.title}
             author={plugin.author}
