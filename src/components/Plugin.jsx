@@ -4,7 +4,7 @@ const Plugin = ({
   id, icon, title, author, description, repo,
 }) => {
   const properIconUrl = (icon) => {
-    if (icon.includes('/')) {
+    if (icon.includes('./')) {
       return icon.split('/')[1];
     }
     return icon;
