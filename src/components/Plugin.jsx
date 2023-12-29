@@ -10,11 +10,15 @@ const Plugin = ({
     return icon;
   };
 
+  const getIconPath = (icon) => (
+    icon ? `https://raw.githubusercontent.com/logseq/marketplace/master/packages/${id}/${properIconUrl(icon)}` : 'https://img.icons8.com/pastel-glyph/64/page-not-found--v2.png'
+  );
+
   return (
     <section className="border-2 p-3 rounded-md">
       <img
         width="100px"
-        src={icon ? `https://raw.githubusercontent.com/logseq/marketplace/master/packages/${id}/${properIconUrl(icon)}` : 'https://img.icons8.com/pastel-glyph/64/page-not-found--v2.png'}
+        src={getIconPath(icon)}
         alt="plugin-icon"
         className="my-3"
       />
