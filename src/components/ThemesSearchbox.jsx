@@ -11,7 +11,7 @@ const ThemesSearchbox = ({ handleSearch }) => (
 );
 
 ThemesSearchbox.propTypes = {
-  handleSearch: PropTypes.string.isRequired,
+  handleSearch: PropTypes.func.isRequired,
 };
 
 export default ThemesSearchbox;

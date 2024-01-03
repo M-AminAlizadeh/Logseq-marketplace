@@ -47,7 +47,7 @@ const Themes = ({ themes, searchValue }) => {
 };
 
 Themes.propTypes = {
-  themes: PropTypes.string.isRequired,
+  themes: PropTypes.arrayOf.isRequired,
   searchValue: PropTypes.string.isRequired,
 };
 

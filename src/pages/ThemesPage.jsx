@@ -4,7 +4,7 @@ import ThemesSearchbox from '../components/ThemesSearchbox';
 
 const ThemesPage = () => {
   const [themes, setThemes] = useState([]);
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
