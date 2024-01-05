@@ -39,9 +39,13 @@ const Theme = ({
   );
 };
 
+Theme.defaultProps = {
+  icon: '',
+};
+
 Theme.propTypes = {
   id: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
