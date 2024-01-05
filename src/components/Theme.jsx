@@ -24,7 +24,7 @@ const Theme = ({
       />
       <div className="flex justify-between items-center">
         <h1 className="text-2xl" title="Theme's Name">{title}</h1>
-        <span title="Auhtor Username">{author}</span>
+        <span title="Author Username">{author}</span>
       </div>
       <p className="py-2" title="Description">{description}</p>
       <a
