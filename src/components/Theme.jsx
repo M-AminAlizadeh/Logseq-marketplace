@@ -23,7 +23,7 @@ const Theme = ({
         className="my-3"
       />
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl" title="Plugin's Name">{title}</h1>
+        <h1 className="text-2xl" title="Theme's Name">{title}</h1>
         <span title="Auhtor Username">{author}</span>
       </div>
       <p className="py-2" title="Description">{description}</p>
