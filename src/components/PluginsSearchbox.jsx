@@ -11,7 +11,7 @@ const PluginsSearchBox = ({ handleSearch }) => (
 );
 
 PluginsSearchBox.propTypes = {
-  handleSearch: PropTypes.string.isRequired,
+  handleSearch: PropTypes.func.isRequired,
 };
 
 export default PluginsSearchBox;
