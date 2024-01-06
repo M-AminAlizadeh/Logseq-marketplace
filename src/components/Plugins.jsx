@@ -48,7 +48,7 @@ const Plugins = ({ plugins, searchValue }) => {
 };
 
 Plugins.propTypes = {
-  plugins: PropTypes.string.isRequired,
+  plugins: PropTypes.arrayOf(PropTypes.shape).isRequired,
   searchValue: PropTypes.string.isRequired,
 };
 

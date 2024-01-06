@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Plugin = ({
+const Theme = ({
   id, icon, title, author, description, repo,
 }) => {
   const properIconUrl = (icon) => {
@@ -23,8 +23,8 @@ const Plugin = ({
         className="my-3"
       />
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl" title="Plugin's Name">{title}</h1>
-        <span title="Auhtor Username">{author}</span>
+        <h1 className="text-2xl" title="Theme's Name">{title}</h1>
+        <span title="Author Username">{author}</span>
       </div>
       <p className="py-2" title="Description">{description}</p>
       <a
@@ -39,11 +39,11 @@ const Plugin = ({
   );
 };
 
-Plugin.defaultProps = {
+Theme.defaultProps = {
   icon: '',
 };
 
-Plugin.propTypes = {
+Theme.propTypes = {
   id: PropTypes.string.isRequired,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -52,4 +52,4 @@ Plugin.propTypes = {
   repo: PropTypes.string.isRequired,
 };
 
-export default Plugin;
+export default Theme;
