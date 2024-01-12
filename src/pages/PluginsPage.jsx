@@ -4,7 +4,7 @@ import PluginsSearchBox from '../components/PluginsSearchbox';
 
 const PluginsPage = () => {
   const [plugins, setPlugins] = useState([]);
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);

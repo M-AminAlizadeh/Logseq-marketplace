@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 
-const PluginsSearchBox = ({ handleSearch }) => (
+const ThemesSearchbox = ({ handleSearch }) => (
   <input
     className="border-2 rounded-md p-2"
     type="text"
-    placeholder="Search Plugins..."
+    placeholder="Search Themes..."
     onChange={(e) => { handleSearch(e); }}
-    title="Search base on name of the plugin"
+    title="Search base on name of the theme"
   />
 );
 
-PluginsSearchBox.propTypes = {
+ThemesSearchbox.propTypes = {
   handleSearch: PropTypes.func.isRequired,
 };
 
-export default PluginsSearchBox;
+export default ThemesSearchbox;
