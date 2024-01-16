@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Logseq-marketplace/static/css/main.87bc30ab.css",
+    "main.js": "/Logseq-marketplace/static/js/main.c5638767.js",
+    "index.html": "/Logseq-marketplace/index.html",
+    "main.87bc30ab.css.map": "/Logseq-marketplace/static/css/main.87bc30ab.css.map",
+    "main.c5638767.js.map": "/Logseq-marketplace/static/js/main.c5638767.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87bc30ab.css",
+    "static/js/main.c5638767.js"
+  ]
+}
