@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Plugin = ({
-  id, icon, title, author, description, repo,
+  id, icon, title, author, description, repo, setPopup,
 }) => {
   const properIconUrl = (icon) => {
     if (icon.includes('./')) {
@@ -20,6 +20,10 @@ const Plugin = ({
       return description;
     }
     return `${description.slice(0, maxContentLength)} ...`;
+  };
+
+  const handlePopup = () => {
+    setPopup(true);
   };
 
   return (
@@ -46,7 +50,11 @@ const Plugin = ({
       </div>
 
       <div className="flex justify-between items-center">
-        <button type="button" className="border px-3 py-2 rounded-xl hover:bg-slate-600 hover:text-white">
+        <button
+          type="button"
+          className="border px-3 py-2 rounded-xl hover:bg-slate-600 hover:text-white"
+          onClick={handlePopup}
+        >
           More
         </button>
         <span title="Auhtor's name">{author}</span>
@@ -66,6 +74,7 @@ Plugin.propTypes = {
   author: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
+  setPopup: PropTypes.func.isRequired,
 };
 
 export default Plugin;
