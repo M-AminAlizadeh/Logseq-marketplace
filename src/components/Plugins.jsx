@@ -1,15 +1,8 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import Plugin from './Plugin';
 import NotFound from './NotFound';
-import Popup from './Popup';
 
-const Plugins = ({ plugins, searchValue }) => {
-  const [popup, setPopup] = useState(false);
-
-  if (popup) {
-    return <Popup />;
-  }
+const Plugins = ({ plugins, searchValue, setPopup }) => {
   if (!searchValue) {
     return (
       <div className="container mx-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -57,6 +50,7 @@ const Plugins = ({ plugins, searchValue }) => {
 Plugins.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.shape).isRequired,
   searchValue: PropTypes.string.isRequired,
+  setPopup: PropTypes.func.isRequired,
 };
 
 export default Plugins;
