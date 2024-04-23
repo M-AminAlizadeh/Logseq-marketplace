@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Plugin = ({
-  id, icon, title, author, description, repo, setPopup,
+  id, icon, title, author, description, repo, setPopup, setPluginClickedID,
 }) => {
   const properIconUrl = (icon) => {
     if (icon.includes('./')) {
@@ -22,7 +22,8 @@ const Plugin = ({
     return `${description.slice(0, maxContentLength)} ...`;
   };
 
-  const handlePopup = () => {
+  const handlePopup = (e) => {
+    setPluginClickedID(e.target.id);
     setPopup(true);
   };
 
@@ -53,7 +54,8 @@ const Plugin = ({
         <button
           type="button"
           className="border px-3 py-2 rounded-xl hover:bg-slate-600 hover:text-white"
-          onClick={handlePopup}
+          id={id}
+          onClick={(e) => handlePopup(e)}
         >
           More
         </button>
@@ -75,6 +77,7 @@ Plugin.propTypes = {
   description: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
   setPopup: PropTypes.func.isRequired,
+  setPluginClickedID: PropTypes.func.isRequired,
 };
 
 export default Plugin;
