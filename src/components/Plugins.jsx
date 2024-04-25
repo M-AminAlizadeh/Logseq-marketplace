@@ -55,7 +55,7 @@ Plugins.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.shape).isRequired,
   searchValue: PropTypes.string.isRequired,
   setPopup: PropTypes.func.isRequired,
-  setPluginClickedID: PropTypes.string.isRequired,
+  setPluginClickedID: PropTypes.func.isRequired,
 };
 
 export default Plugins;
