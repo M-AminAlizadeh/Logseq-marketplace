@@ -18,7 +18,7 @@ const Popup = ({ pluginClickedID, setPopup }) => {
     fetchData();
   }, [pluginClickedID]);
   return (
-    <div className="border w-9/12 p-5 mx-auto my-6 h-screen rounded">
+    <div className="border bg-white w-10/12 p-5 mx-auto my-5 h-screen relative z-10">
       <div className="flex justify-between">
         <h3 className="text-3xl">{pluginClickedID}</h3>
         <button type="button" onClick={() => setPopup(false)}>

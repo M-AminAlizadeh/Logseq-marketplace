@@ -32,27 +32,26 @@ const PluginsPage = () => {
     fetchData();
   }, []);
 
-  if (popup) {
-    return (
+  return (
+    popup ? (
       <Popup
         pluginClickedID={pluginClickedID}
         setPopup={setPopup}
       />
-    );
-  }
-  return (
-    <div className="container mx-auto my-6">
-      <div className="flex justify-between">
-        <h2 className="text-3xl font-bold">Plugins</h2>
-        <PluginsSearchBox handleSearch={handleSearch} />
+    ) : (
+      <div className="container mx-auto my-6">
+        <div className="flex justify-between">
+          <h2 className="text-3xl font-bold">Plugins</h2>
+          <PluginsSearchBox handleSearch={handleSearch} />
+        </div>
+        <Plugins
+          plugins={plugins}
+          searchValue={searchValue}
+          setPopup={setPopup}
+          setPluginClickedID={setPluginClickedID}
+        />
       </div>
-      <Plugins
-        plugins={plugins}
-        searchValue={searchValue}
-        setPopup={setPopup}
-        setPluginClickedID={setPluginClickedID}
-      />
-    </div>
+    )
   );
 };
 
