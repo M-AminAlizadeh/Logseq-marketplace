@@ -44,6 +44,7 @@ const Plugins = ({
           author={plugin.author}
           description={plugin.description}
           repo={`https://github.com/${plugin.repo}`}
+          setPopup={setPopup}
           setPluginClickedID={setPluginClickedID}
         />
       ))}
