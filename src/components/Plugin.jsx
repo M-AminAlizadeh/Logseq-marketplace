@@ -28,16 +28,27 @@ const Plugin = ({
   };
 
   return (
-    <section className="flex flex-col gap-3  border-2 p-2 rounded-md">
+    <section className="flex flex-col gap-3 border-2 p-2 rounded-md">
       <div className="flex items-center relative">
         <img
           width="75px"
           src={getIconPath(icon)}
           alt="plugin-icon"
-          className="my-3"
+          className="my-3 cursor-pointer"
+          aria-hidden="true"
+          id={id}
+          onClick={(e) => handlePopup(e)}
         />
         <div className="flex flex-col justify-between mx-3">
-          <h2 className="text-xl" title="Plugin's Name">{title}</h2>
+          <h2
+            className="text-xl cursor-pointer"
+            title="Plugin's Name"
+            aria-hidden="true"
+            id={id}
+            onClick={(e) => handlePopup(e)}
+          >
+            {title}
+          </h2>
           <p className="py-2" title="Description">{properDescription(description)}</p>
         </div>
         <a
@@ -51,14 +62,6 @@ const Plugin = ({
       </div>
 
       <div className="flex justify-between items-center">
-        <button
-          type="button"
-          className="border px-3 py-2 rounded-xl hover:bg-slate-600 hover:text-white"
-          id={id}
-          onClick={(e) => handlePopup(e)}
-        >
-          More
-        </button>
         <span title="Auhtor's name">{author}</span>
       </div>
     </section>
