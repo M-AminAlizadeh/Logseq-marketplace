@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const Popup = ({ pluginClickedID, setPopup }) => {
+const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [repoUrl, setRepoUrl] = useState('');
   const [readmeContent, setReadmeContent] = useState('Loading ...');
   const branchNameList = ['main', 'master'];
 
   useEffect(() => {
+    const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
+    setRepoUrl(plugin.repo);
     const readmeFetch = async () => {
       const promises = branchNameList.map(async (branchName) => {
         const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
@@ -25,20 +27,7 @@ const Popup = ({ pluginClickedID, setPopup }) => {
         console.error('README not found in any branch');
       }
     };
-
-    const fetchData = async () => {
-      fetch('https://cdn.jsdelivr.net/gh/logseq/marketplace@master/plugins.json')
-        .then((response) => response.json())
-        .then((data) => {
-          data.packages.forEach((item) => {
-            if (!item.theme && item.id === pluginClickedID) {
-              setRepoUrl(item.repo);
-              readmeFetch();
-            }
-          });
-        });
-    };
-    fetchData();
+    readmeFetch();
   }, [pluginClickedID, repoUrl]);
 
   return (
@@ -59,6 +48,7 @@ const Popup = ({ pluginClickedID, setPopup }) => {
 Popup.propTypes = {
   pluginClickedID: PropTypes.string.isRequired,
   setPopup: PropTypes.func.isRequired,
+  plugins: PropTypes.arrayOf.isRequired,
 };
 
 export default Popup;

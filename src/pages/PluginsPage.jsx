@@ -37,6 +37,7 @@ const PluginsPage = () => {
       <Popup
         pluginClickedID={pluginClickedID}
         setPopup={setPopup}
+        plugins={plugins}
       />
     ) : (
       <div className="container mx-auto my-6">
