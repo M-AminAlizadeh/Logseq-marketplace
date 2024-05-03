@@ -8,9 +8,9 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
 
   useEffect(() => {
     const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
-    setRepoUrl(plugin.repo);
+    setRepoUrl(plugin[0].repo);
     const readmeFetch = async () => {
-      const promises = branchNameList.map(async (branchName) => {
+      branchNameList.map(async (branchName) => {
         const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
         if (response.status === 200) {
           const data = await response.text();
@@ -21,11 +21,6 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
         }
         return false;
       });
-
-      const results = await Promise.all(promises);
-      if (!results.some((found) => found)) {
-        console.error('README not found in any branch');
-      }
     };
     readmeFetch();
   }, [pluginClickedID, repoUrl]);
