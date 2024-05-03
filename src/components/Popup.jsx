@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import MarkdownView from 'react-showdown';
 import PropTypes from 'prop-types';
 
 const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [repoUrl, setRepoUrl] = useState('');
-  const [readmeContent, setReadmeContent] = useState('Loading ...');
+  const [readmeContent, setReadmeContent] = useState('');
   const branchNameList = ['main', 'master'];
 
   useEffect(() => {
@@ -26,15 +27,29 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   }, [pluginClickedID, repoUrl]);
 
   return (
-    <div className="border bg-white w-10/12 p-5 mx-auto my-5 h-screen relative z-10">
+    <div className="border border-black rounded-xl bg-gray-300 w-10/12 p-5 mx-auto my-5 h-screen relative z-10 overflow-scroll">
       <div className="flex justify-between">
         <h3 className="text-3xl">{pluginClickedID}</h3>
         <button type="button" onClick={() => setPopup(false)}>
           <img src="https://img.icons8.com/ios/50/cancel.png" alt="cancel" />
         </button>
       </div>
-      <article className="my-5">
-        {readmeContent}
+      <article className="my-5 p-5">
+        <MarkdownView
+          markdown={readmeContent}
+          options={
+            {
+              parseImgDimensions: true,
+              tables: true,
+              strikethrough: true,
+              tasklists: true,
+              omitExtraWLInCodeBlocks: true,
+              headerLevelStart: true,
+              simplifiedAutoLink: true,
+              ghCodeBlocks: true,
+            }
+          }
+        />
       </article>
     </div>
   );
