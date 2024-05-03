@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import MarkdownView from 'react-showdown';
 import PropTypes from 'prop-types';
+import BeatLoader from 'react-spinners/BeatLoader';
+
+const override = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '200px auto',
+  color: 'red',
+};
 
 const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [repoUrl, setRepoUrl] = useState('');
   const [readmeContent, setReadmeContent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const branchNameList = ['main', 'master'];
 
   useEffect(() => {
@@ -17,6 +27,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
           const data = await response.text();
           if (data) {
             setReadmeContent(data);
+            setIsLoading(false);
             return true;
           }
         }
@@ -34,23 +45,26 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
           <img src="https://img.icons8.com/ios/50/cancel.png" alt="cancel" />
         </button>
       </div>
-      <article className="my-5 p-5">
-        <MarkdownView
-          markdown={readmeContent}
-          options={
-            {
-              parseImgDimensions: true,
-              tables: true,
-              strikethrough: true,
-              tasklists: true,
-              omitExtraWLInCodeBlocks: true,
-              headerLevelStart: true,
-              simplifiedAutoLink: true,
-              ghCodeBlocks: true,
-            }
-          }
-        />
-      </article>
+      {isLoading ? (<BeatLoader color="#36d7b7" cssOverride={override} size={40} aria-label="Loading Spinner" />)
+        : (
+          <article className="my-5 p-5">
+            <MarkdownView
+              markdown={readmeContent}
+              options={
+                {
+                  parseImgDimensions: true,
+                  tables: true,
+                  strikethrough: true,
+                  tasklists: true,
+                  omitExtraWLInCodeBlocks: true,
+                  headerLevelStart: true,
+                  simplifiedAutoLink: true,
+                  ghCodeBlocks: true,
+                }
+              }
+            />
+          </article>
+        )}
     </div>
   );
 };
