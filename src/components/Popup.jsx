@@ -72,7 +72,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
 Popup.propTypes = {
   pluginClickedID: PropTypes.string.isRequired,
   setPopup: PropTypes.func.isRequired,
-  plugins: PropTypes.arrayOf.isRequired,
+  plugins: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default Popup;
