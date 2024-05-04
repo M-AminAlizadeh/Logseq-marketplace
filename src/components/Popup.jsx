@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BeatLoader from 'react-spinners/BeatLoader';
 import markdownit from 'markdown-it';
+import parse from 'html-react-parser';
 
 const override = {
   display: 'flex',
@@ -14,7 +15,7 @@ const override = {
 const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [repoUrl, setRepoUrl] = useState('');
   const [readmeContentMd, setReadmeContentMd] = useState('');
-  const [readmeContentHtml, setReadmeContentHtml] = useState(undefined);
+  const [readmeContentHtml, setReadmeContentHtml] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const branchNameList = ['main', 'master'];
   const md = markdownit();
@@ -37,8 +38,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
       });
     };
     readmeFetch();
-    console.log(typeof md.render(readmeContentMd));
-    setReadmeContentHtml(md.render(readmeContentMd));
+    setReadmeContentHtml(parse(md.render(readmeContentMd)));
   }, [pluginClickedID, repoUrl, readmeContentMd]);
 
   return (
