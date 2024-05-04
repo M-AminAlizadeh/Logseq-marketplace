@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BeatLoader from 'react-spinners/BeatLoader';
+import markdownit from 'markdown-it';
 
 const override = {
   display: 'flex',
@@ -12,9 +13,11 @@ const override = {
 
 const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [repoUrl, setRepoUrl] = useState('');
-  const [readmeContent, setReadmeContent] = useState('');
+  const [readmeContentMd, setReadmeContentMd] = useState('');
+  const [readmeContentHtml, setReadmeContentHtml] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const branchNameList = ['main', 'master'];
+  const md = markdownit();
 
   useEffect(() => {
     const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
@@ -25,7 +28,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
         if (response.status === 200) {
           const data = await response.text();
           if (data) {
-            setReadmeContent(data);
+            setReadmeContentMd(data);
             setIsLoading(false);
             return true;
           }
@@ -34,7 +37,9 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
       });
     };
     readmeFetch();
-  }, [pluginClickedID, repoUrl]);
+    console.log(typeof md.render(readmeContentMd));
+    setReadmeContentHtml(md.render(readmeContentMd));
+  }, [pluginClickedID, repoUrl, readmeContentMd]);
 
   return (
     <div className="border border-black rounded-xl bg-gray-300 w-10/12 p-5 mx-auto my-5 h-screen relative z-10 overflow-scroll">
@@ -47,7 +52,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
       {isLoading ? (<BeatLoader color="#36d7b7" cssOverride={override} size={40} aria-label="Loading Spinner" />)
         : (
           <article className="my-5 p-5">
-            {readmeContent}
+            {readmeContentHtml}
           </article>
         )}
     </div>
