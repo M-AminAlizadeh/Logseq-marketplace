@@ -9,7 +9,6 @@ const override = {
   justifyContent: 'center',
   alignItems: 'center',
   margin: '200px auto',
-  color: 'red',
 };
 
 const Popup = ({ pluginClickedID, setPopup, plugins }) => {
