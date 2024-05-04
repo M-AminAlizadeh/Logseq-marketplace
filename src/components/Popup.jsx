@@ -24,16 +24,19 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
     setRepoUrl(plugin[0].repo);
     const readmeFetch = async () => {
       branchNameList.map(async (branchName) => {
-        const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
-        if (response.status === 200) {
-          const data = await response.text();
-          if (data) {
-            setReadmeContentMd(data);
-            setIsLoading(false);
-            return true;
+        if (repoUrl) {
+          const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
+          if (response.status === 200) {
+            const data = await response.text();
+            if (data) {
+              setReadmeContentMd(data);
+              setIsLoading(false);
+              return true;
+            }
           }
+          return false;
         }
-        return false;
+        return '';
       });
     };
     readmeFetch();
