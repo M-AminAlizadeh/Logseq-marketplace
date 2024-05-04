@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import MarkdownView from 'react-showdown';
 import PropTypes from 'prop-types';
 import BeatLoader from 'react-spinners/BeatLoader';
 
@@ -48,21 +47,7 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
       {isLoading ? (<BeatLoader color="#36d7b7" cssOverride={override} size={40} aria-label="Loading Spinner" />)
         : (
           <article className="my-5 p-5">
-            <MarkdownView
-              markdown={readmeContent}
-              options={
-                {
-                  parseImgDimensions: true,
-                  tables: true,
-                  strikethrough: true,
-                  tasklists: true,
-                  omitExtraWLInCodeBlocks: true,
-                  headerLevelStart: true,
-                  simplifiedAutoLink: true,
-                  ghCodeBlocks: true,
-                }
-              }
-            />
+            {readmeContent}
           </article>
         )}
     </div>
