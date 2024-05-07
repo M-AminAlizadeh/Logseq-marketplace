@@ -22,24 +22,18 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   useEffect(() => {
     const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
     setRepoUrl(plugin[0].repo);
-    const readmeFetch = async () => {
-      branchNameList.map(async (branchName) => {
-        if (repoUrl) {
-          const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
-          if (response.status === 200) {
-            const data = await response.text();
-            if (data) {
-              setReadmeContentMd(data);
-              setIsLoading(false);
-              return true;
-            }
+    branchNameList.forEach(async (branchName) => {
+      if (repoUrl) {
+        const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
+        if (response.status === 200) {
+          const data = await response.text();
+          if (data) {
+            setReadmeContentMd(data);
+            setIsLoading(false);
           }
-          return false;
         }
-        return '';
-      });
-    };
-    readmeFetch();
+      }
+    });
     setReadmeContentHtml(parse(md.render(readmeContentMd)));
   }, [pluginClickedID, repoUrl, readmeContentMd]);
 
