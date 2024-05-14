@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import Plugins from '../components/Plugins';
 import PluginsSearchBox from '../components/PluginsSearchbox';
+import Popup from '../components/Popup';
 
 const PluginsPage = () => {
   const [plugins, setPlugins] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [popup, setPopup] = useState(false);
+  const [pluginClickedID, setPluginClickedID] = useState('');
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
@@ -30,13 +33,26 @@ const PluginsPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto my-6">
-      <div className="flex justify-between">
-        <h2 className="text-3xl font-bold">Plugins</h2>
-        <PluginsSearchBox handleSearch={handleSearch} />
+    popup ? (
+      <Popup
+        pluginClickedID={pluginClickedID}
+        setPopup={setPopup}
+        plugins={plugins}
+      />
+    ) : (
+      <div className="container mx-auto my-6">
+        <div className="flex justify-between">
+          <h2 className="text-3xl font-bold">Plugins</h2>
+          <PluginsSearchBox handleSearch={handleSearch} />
+        </div>
+        <Plugins
+          plugins={plugins}
+          searchValue={searchValue}
+          setPopup={setPopup}
+          setPluginClickedID={setPluginClickedID}
+        />
       </div>
-      <Plugins plugins={plugins} searchValue={searchValue} />
-    </div>
+    )
   );
 };
 
