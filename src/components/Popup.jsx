@@ -16,16 +16,22 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [readmeContentMd, setReadmeContentMd] = useState('');
   const [readmeContentHtml, setReadmeContentHtml] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const branchNameList = ['main', 'master'];
   const md = markdownit();
 
   useEffect(() => {
     const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
     setRepoUrl(plugin[0].repo);
-    branchNameList.forEach(async (branchName) => {
+    const fetchFromMasterBranch = async () => {
       if (repoUrl) {
-        const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/${branchName}/README.md`);
+        const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/master/README.md`);
         if (response.status === 200) {
+          const data = await response.text();
+          if (data) {
+            setReadmeContentMd(data);
+            setIsLoading(false);
+          }
+        } else {
+          const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/main/README.md`);
           const data = await response.text();
           if (data) {
             setReadmeContentMd(data);
@@ -33,7 +39,9 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
           }
         }
       }
-    });
+    };
+
+    fetchFromMasterBranch();
     setReadmeContentHtml(parse(md.render(readmeContentMd)));
   }, [pluginClickedID, repoUrl, readmeContentMd]);
 
