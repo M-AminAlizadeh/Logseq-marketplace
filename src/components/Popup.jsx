@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BeatLoader from 'react-spinners/BeatLoader';
-import markdownit from 'markdown-it';
+import { Remarkable } from 'remarkable';
 import parse from 'html-react-parser';
 
 const override = {
@@ -16,22 +16,23 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
   const [readmeContentMd, setReadmeContentMd] = useState('');
   const [readmeContentHtml, setReadmeContentHtml] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const md = markdownit();
+  const md = new Remarkable();
 
   useEffect(() => {
-    const plugin = plugins.filter((plugin) => plugin.id === pluginClickedID);
-    setRepoUrl(plugin[0].repo);
-    const fetchFromMasterBranch = async () => {
+    const plugin = plugins.find((plugin) => plugin.id === pluginClickedID);
+    if (plugin) {
+      setRepoUrl(plugin.repo);
+    }
+  }, [pluginClickedID, plugins]);
+
+  useEffect(() => {
+    const fetchReadme = async () => {
       if (repoUrl) {
-        const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/master/README.md`);
+        let response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/master/README.md`);
+        if (response.status !== 200) {
+          response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/main/README.md`);
+        }
         if (response.status === 200) {
-          const data = await response.text();
-          if (data) {
-            setReadmeContentMd(data);
-            setIsLoading(false);
-          }
-        } else {
-          const response = await fetch(`https://raw.githubusercontent.com/${repoUrl}/main/README.md`);
           const data = await response.text();
           if (data) {
             setReadmeContentMd(data);
@@ -41,9 +42,14 @@ const Popup = ({ pluginClickedID, setPopup, plugins }) => {
       }
     };
 
-    fetchFromMasterBranch();
-    setReadmeContentHtml(parse(md.render(readmeContentMd)));
-  }, [pluginClickedID, repoUrl, readmeContentMd]);
+    fetchReadme();
+  }, [repoUrl]);
+
+  useEffect(() => {
+    if (readmeContentMd) {
+      setReadmeContentHtml(parse(md.render(readmeContentMd)));
+    }
+  }, [readmeContentMd, md]);
 
   return (
     <div className="border border-black rounded-xl bg-gray-300 w-10/12 p-5 mx-auto my-5 h-screen relative z-10 overflow-scroll">
