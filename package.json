@@ -1,7 +1,7 @@
 {
   "name": "logsec-marketplace",
   "version": "0.1.0",
-  "homepage": "https://m-aminalizadeh.github.io/Logseq-marketplace",
+  "homepage": "https://m-aminalizadeh.github.io",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
