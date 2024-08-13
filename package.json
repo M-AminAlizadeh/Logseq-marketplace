@@ -1,7 +1,7 @@
 {
   "name": "logsec-marketplace",
   "version": "0.1.0",
-  "homepage": "https://m-aminalizadeh.github.io/Logseq-marketplace",
+  "homepage": "https://m-aminalizadeh.github.io",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -9,13 +9,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "html-react-parser": "^5.1.10",
-    "markdown-it": "^14.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "remarkable": "^2.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -54,7 +54,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "gh-pages": "^6.1.1",
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3"
   }
